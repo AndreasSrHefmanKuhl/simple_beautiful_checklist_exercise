@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/mock_database.dart';
+import 'package:simple_beautiful_checklist_exercise/shared/preferences.dart';
 
 import 'features/splash/splash_screen.dart';
 import 'home_screen.dart';
@@ -9,9 +11,13 @@ import 'home_screen.dart';
 void main() async {
   // Wird benötigt, um auf SharedPreferences zuzugreifen
   WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsBindingObserver.didChangePlatformBrightness(); möglicher hinweis auf bug lösung?
 
   // TODO: Hier statt MockDatabase() ein SharedPreferencesRepository() verwenden.
-  final DatabaseRepository repository = MockDatabase();
+  final prefs = await SharedPreferences
+      .getInstance(); //Zugriff auf PrefRepo und ein objekt erstellt zum füllen
+  final DatabaseRepository repository =
+      SharedPreferencesRepository(prefs); // PrefRepo in Database implementiert
 
   runApp(MainApp(repository: repository));
 }
@@ -22,11 +28,15 @@ class MainApp extends StatelessWidget {
     required this.repository,
   });
 
-  final DatabaseRepository repository;
+  final DatabaseRepository
+      repository; // Als DataBase aufgerufen mit implemtierten daten
+
+  //final DatabaseRepository repository;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
@@ -38,13 +48,12 @@ class MainApp extends StatelessWidget {
           ThemeData(brightness: Brightness.dark).textTheme,
         ),
       ),
-      themeMode: ThemeMode.system,
       title: 'Checklisten App',
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
         '/home': (context) => HomeScreen(
-              repository: repository,
+              repository: repository, // Attacke!
             ),
       },
     );
