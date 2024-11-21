@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
-import 'package:simple_beautiful_checklist_exercise/shared/mock_database.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/preferences.dart';
 
 import 'features/splash/splash_screen.dart';
