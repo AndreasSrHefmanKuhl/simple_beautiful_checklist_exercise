@@ -10,9 +10,8 @@ import 'home_screen.dart';
 void main() async {
   // Wird benötigt, um auf SharedPreferences zuzugreifen
   WidgetsFlutterBinding.ensureInitialized();
-  //WidgetsBindingObserver.didChangePlatformBrightness(); möglicher hinweis auf bug lösung?
 
-  // TODO: Hier statt MockDatabase() ein SharedPreferencesRepository() verwenden.
+  //  Hier  MockDatabase() ein SharedPreferencesRepository() verwenden.
   final prefs = await SharedPreferences
       .getInstance(); //Zugriff auf PrefRepo und ein objekt erstellt zum füllen
   final DatabaseRepository repository =
