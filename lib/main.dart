@@ -39,7 +39,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
-        textTheme: GoogleFonts.robotoMonoTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.robotoMonoTextTheme(
+            ThemeData(brightness: Brightness.light).textTheme),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
