@@ -5,13 +5,13 @@ class MockDatabase implements DatabaseRepository {
 
   @override
   Future<int> get itemCount async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 20));
     return _items.length;
   }
 
   @override
   Future<List<String>> getItems() async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 20));
     return _items;
   }
 
